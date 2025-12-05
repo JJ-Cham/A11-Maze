@@ -1,5 +1,63 @@
 /* This class should implement the DisplayableMaze interface */
-public class Maze{
+public class Maze implements DisplayableMaze {
+
+  //instance variables
+  private int height;
+  private int width;
+  private MazeContents[][] mazeGrid;
+  private MazeLocation start;
+  private MazeLocation finish; 
+
+  public Maze(){
+      //default constructor
+  }
+
+  //making stubs 
+  //fill in stubs
+  @Override
+  public int getHeight(){
+      return height;
+  }
+
+  @Override
+  public int getWidth(){
+      return width;
+  }
+
+  @Override
+  public MazeContents getContents(int i, int j){
+      return mazeGrid[i][j];
+  }
+   
+  @Override
+  public MazeLocation getStart(){
+      return start;
+  }
+
+  @Override
+  public MazeLocation getFinish(){
+      return finish;
+  }
+
+  @Override
+  public Boolean checkExplorable(int i, int j){
+      // int row = loc.getRow();
+      // int col = loc.getCol();
+
+    //checking bounds 
+    if(i <0|| i>= height || j <0 || j >= width){
+        return false;
+    }
+
+    //checking if open/contents 
+    MazeContents cell = mazeGrid[i][j];
+    return (cell == MazeContents.OPEN || 
+            cell == MazeContents.PATH||
+            cell == MazeContents.VISITED||
+            cell == MazeContents.WALL||
+            cell == MazeContents.DEAD_END); 
+
+  }
 
 
     /** This DemoMaze method will allow you to generate a simple maze
@@ -28,48 +86,5 @@ public class Maze{
         this.mazeGrid[8][0] = MazeContents.WALL; this.mazeGrid[8][1] = MazeContents.OPEN; this.mazeGrid[8][2] = MazeContents.OPEN; this.mazeGrid[8][3] = MazeContents.WALL; this.mazeGrid[8][4] = MazeContents.OPEN; this.mazeGrid[8][5] = MazeContents.WALL; this.mazeGrid[8][6] = MazeContents.OPEN; this.mazeGrid[8][7] = MazeContents.WALL;
         this.mazeGrid[9][0] = MazeContents.WALL; this.mazeGrid[9][1] = MazeContents.WALL; this.mazeGrid[9][2] = MazeContents.WALL; this.mazeGrid[9][3] = MazeContents.WALL; this.mazeGrid[9][4] = MazeContents.WALL; this.mazeGrid[9][5] = MazeContents.WALL; this.mazeGrid[9][6] = MazeContents.WALL; this.mazeGrid[9][7] = MazeContents.WALL;
   }
-
-  //making stubs 
-  //fill in stubs
-  public int getHeight(){
-      return this.height;
-  }
-
-  public int getWidth(){
-      return this.width;
-  }
-
-  public MazeContents getContents(int i, int j){
-      return this.mazeGrid[i][j];
-  }  
-
-  public Boolean checkExplorable(int i, int j){
-      return this.mazeGrid[i][j] == MazeContents.OPEN;
-  }
-   
-  public MazeLocation getStart(){
-      return this.start;
-  }
-
-  public MazeLocation getFinish(){
-      return this.finish;
-  }
-  private int height;
-  private int width;
-  private MazeContents[][] mazeGrid;
-  private MazeLocation start;
-  private MazeLocation finish;
-
-  public void isExplorable(MazeLocation loc){
-      int row = loc.getRow();
-      int col = loc.getCol();
-      if(this.mazeGrid[row][col] == MazeContents.OPEN){
-          return true;
-      } else {
-          return false;
-      }
-
-  }
-
 
 }
