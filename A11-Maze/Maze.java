@@ -1,4 +1,9 @@
 /* This class should implement the DisplayableMaze interface */
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class Maze implements DisplayableMaze {
 
   //instance variables
@@ -11,6 +16,58 @@ public class Maze implements DisplayableMaze {
   public Maze(){
       //default constructor
   }
+
+  public Maze(String filename) {
+    readFromFile(filename);
+}
+
+  private void readFromFile(String filename) {
+    try {
+        Scanner file = new Scanner(new File(filename));
+        
+        // First, read all lines to get dimensions
+        java.util.List<String> lines = new java.util.ArrayList<>();
+        while (file.hasNextLine()) {
+            lines.add(file.nextLine());
+        }
+        file.close();
+        
+        height = lines.size();
+        width = lines.get(0).length(); // assume all lines same length
+        mazeGrid = new MazeContents[height][width];
+        
+        for (int i = 0; i < height; i++) {
+            String line = lines.get(i);
+            for (int j = 0; j < width; j++) {
+                char c = line.charAt(j);
+                switch (c) {
+                    case '#':
+                        mazeGrid[i][j] = MazeContents.WALL;
+                        break;
+                    case '.':
+                    case ' ':
+                        mazeGrid[i][j] = MazeContents.OPEN;
+                        break;
+                    case 'S':
+                        start = new MazeLocation(i,j);
+                        mazeGrid[i][j] = MazeContents.OPEN; // treat start as open
+                        break;
+                    case 'F':
+                        finish = new MazeLocation(i,j);
+                        mazeGrid[i][j] = MazeContents.OPEN; // treat finish as open
+                        break;
+                    default:
+                        mazeGrid[i][j] = MazeContents.WALL; // fallback
+                }
+            }
+        }
+        
+    } catch (FileNotFoundException e) {
+        System.err.println("Maze file not found: " + filename);
+        System.exit(-1);
+    }
+}
+
 
   //making stubs 
   //fill in stubs
@@ -40,25 +97,13 @@ public class Maze implements DisplayableMaze {
   }
 
   @Override
-  public Boolean checkExplorable(int i, int j){
-      // int row = loc.getRow();
-      // int col = loc.getCol();
-
-    //checking bounds 
-    if(i <0|| i>= height || j <0 || j >= width){
-        return false;
+  public Boolean checkExplorable(int i, int j) {
+        // out of bounds = not explorable
+        if (i < 0 || i >= height || j < 0 || j >= width) {
+            return false;
+        }
+        return mazeGrid[i][j].isExplorable;
     }
-
-    //checking if open/contents 
-    MazeContents cell = mazeGrid[i][j];
-    return (cell == MazeContents.OPEN || 
-            cell == MazeContents.PATH||
-            cell == MazeContents.VISITED||
-            cell == MazeContents.WALL||
-            cell == MazeContents.DEAD_END); 
-
-  }
-
 
     /** This DemoMaze method will allow you to generate a simple maze
      * to test your code on as you develop it. Ultimately, you need
@@ -86,5 +131,38 @@ public class Maze implements DisplayableMaze {
         this.mazeGrid[8][0] = MazeContents.WALL; this.mazeGrid[8][1] = MazeContents.OPEN; this.mazeGrid[8][2] = MazeContents.OPEN; this.mazeGrid[8][3] = MazeContents.WALL; this.mazeGrid[8][4] = MazeContents.OPEN; this.mazeGrid[8][5] = MazeContents.WALL; this.mazeGrid[8][6] = MazeContents.OPEN; this.mazeGrid[8][7] = MazeContents.WALL;
         this.mazeGrid[9][0] = MazeContents.WALL; this.mazeGrid[9][1] = MazeContents.WALL; this.mazeGrid[9][2] = MazeContents.WALL; this.mazeGrid[9][3] = MazeContents.WALL; this.mazeGrid[9][4] = MazeContents.WALL; this.mazeGrid[9][5] = MazeContents.WALL; this.mazeGrid[9][6] = MazeContents.WALL; this.mazeGrid[9][7] = MazeContents.WALL;
   }
+
+  public void markVisited(MazeLocation loc) {
+    mazeGrid[loc.getRow()][loc.getCol()] = MazeContents.VISITED;
+}
+
+    public void markDeadEnd(MazeLocation loc) {
+        mazeGrid[loc.getRow()][loc.getCol()] = MazeContents.DEAD_END;
+    }
+
+    public void markPath(MazeLocation loc) {
+        mazeGrid[loc.getRow()][loc.getCol()] = MazeContents.PATH;
+    }
+
+  public void loadFromScanner(Scanner s) {
+    this.height = s.nextInt();
+    this.width = s.nextInt();
+    this.start = new MazeLocation(s.nextInt(), s.nextInt());
+    this.finish = new MazeLocation(s.nextInt(), s.nextInt());
+
+    mazeGrid = new MazeContents[height][width];
+
+    for (int r = 0; r < height; r++) {
+        String line = s.next();
+        for (int c = 0; c < width; c++) {
+            char ch = line.charAt(c);
+            switch (ch) {
+                case '#': mazeGrid[r][c] = MazeContents.WALL; break;
+                case '.': mazeGrid[r][c] = MazeContents.OPEN; break;
+                default: mazeGrid[r][c] = MazeContents.WALL;
+            }
+        }
+    }
+}
 
 }

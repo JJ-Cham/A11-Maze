@@ -1,4 +1,4 @@
-# Assignment 4:  Graphs and Recursive Maze Solving
+# Assignment 11:  Graphs and Recursive Maze Solving
 
 For this assignment, you will write a program to solving mazes using **recursion**. The "big idea" is as follows: from each position in the maze, you will recursively call the next steps. This means that when you find the Finish Line, the path taken there from the start will be stored _implicitly on the call stack_ based on which calls return `true`. Your goal is to write a program that uses recursion to complete mazes passed via the command line or as user input.
 
