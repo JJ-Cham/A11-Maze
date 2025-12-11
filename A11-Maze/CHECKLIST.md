@@ -10,41 +10,41 @@ your work, please indicate the status of each item
 
 ## Assignment Points:
 
-_____ 1 pt: Maze class implements DisplayableMaze interface
+_**YES**____ 1 pt: Maze class implements DisplayableMaze interface
 
-_____ 2 pts: `solve` method correctly determines if solution exists
+__**YES**___ 2 pts: `solve` method correctly determines if solution exists
 
-_____ 2 pts: `solve` method uses recursion
+__**YES**___ 2 pts: `solve` method uses recursion
 
-_____ 1 pts: `isExplorable` correctly identifies explorable locations
+_**YES**____ 1 pts: `isExplorable` correctly identifies explorable locations
 
-_____ 1 pts: recursive style is simple and direct
+_**YES**____ 1 pts: recursive style is simple and direct
 
-_____ 1 pts: Encodes maze contained in a text file
+_**YES**____ 1 pts: Encodes maze contained in a text file
 
-_____ 1 pts: ShortestPath implements Dijkstra's algorithm to find the shortest path
+_**YES**____ 1 pts: ShortestPath implements Dijkstra's algorithm to find the shortest path
 
-_____ 1 pts: Secondary storage for ShortestPath uses well-reasoned data structures
+_**YES**____ 1 pts: Secondary storage for ShortestPath uses well-reasoned data structures
 
 
 ## General Items:
 
-_____ 4 pts: Program compiles without errors or warnings
+___**YES**__ 4 pts: Program compiles without errors or warnings
 
-_____ 2 pts: Executes fully & consistently without crashing (exception/freeze)
+__**PART**___ 2 pts: Executes fully & consistently without crashing (exception/freeze)
 
-_____ 2 pt: Complies with style guidelines (missing items 1 pt each):
+__**PART**___ 2 pt: Complies with style guidelines (missing items 1 pt each):
 
-      _____ Classes & class members all have Javadoc header comments
+      __**YES**___ Classes & class members all have Javadoc header comments
 
-      _____ Clear and consistent indentation of bracketed sections
+      __**YES**___ Clear and consistent indentation of bracketed sections
 
-      _____ Adheres to Java conventions on naming & capitalization
+      _**YES**____ Adheres to Java conventions on naming & capitalization
 
-      _____ Methods & variables all have clear and accurate names
+      __**YES**___ Methods & variables all have clear and accurate names
 
-      _____ Methods avoid confusing side effects
+      __**YES**___ Methods avoid confusing side effects
 
-_____ 1 pt: All required files included with submission & named correctly (including completed checklist file)
+__**YES**___ 1 pt: All required files included with submission & named correctly (including completed checklist file)
 
-_____ 1 pt: readme.md contains reflection on the assignment
+_**YES**____ 1 pt: readme.md contains reflection on the assignment
