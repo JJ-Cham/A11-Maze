@@ -1,66 +1,78 @@
-import java.io.*;
-import java.util.Scanner;
+/**
+ * SolveMaze class performs recursive exploration of a Maze.
+ * Uses depth-first search with recursion to determine whether
+ * the finish can be reached from the start.
+ *
+ * @author JJ Cham
+ * @version December 2025
+ */
+public class SolveMaze {
 
-class SolveMaze {
+    private Maze maze;
 
-  public static Scanner readMaze(String fname){
-    Scanner file = null;
-    try {
-      file = new Scanner(new File(fname));
-    } catch (FileNotFoundException e) {
-      System.err.println("Cannot locate file.");
-      System.exit(-1);  
+    /**
+     * Constructs a solver for the given maze.
+     * @param maze the maze to solve
+     */
+    public SolveMaze(Maze maze) {
+        this.maze = maze;
     }
-    return file;
-  }
-  
-  public static void main(String[] args) {
-    if(args.length <= 0){
-      System.err.println("Please provide the name of the maze file.");
-      System.exit(-1);
-    }
-    Scanner file = readMaze(args[0]);
-    
-    Maze maze = new Maze();
-    MazeViewer viewer = new MazeViewer(maze);
-  }
 
-  //goals
-  //Write recursive DFS maze solver
-  // Mark VISITED / PATH / DEAD_END
-  // Animate it use DFS
-   public static boolean dfs(Maze maze, MazeLocation loc) {
+    /**
+     * Recursively explores the maze from a given location.
+     * @param loc current location
+     * @return true if finish is reachable, false otherwise
+     */
+    public boolean solve(MazeLocation loc) {
+        try { Thread.sleep(50); } catch (InterruptedException e) {}
 
-        // base cases:
         if (loc.equals(maze.getFinish())) {
             maze.markPath(loc);
             return true;
         }
 
-        // if not explorable, stop
         if (!maze.checkExplorable(loc.getRow(), loc.getCol())) {
             return false;
         }
 
-        // mark visited
         maze.markVisited(loc);
 
-        // try all directions
         for (MazeDirection dir : MazeDirection.values()) {
-            MazeLocation next = loc.neighbor(dir);
-
-            if (dfs(maze, next)) {
-                maze.markPath(loc);    // part of solution
+            MazeLocation next = loc.move(dir);
+            if (solve(next)) {
+                maze.markPath(loc);
                 return true;
             }
         }
 
-        // dead end
         maze.markDeadEnd(loc);
         return false;
     }
 
+    /**
+     * Main method: reads maze file from command line and solves it.
+     * @param args command line arguments (expects maze filename)
+     */
+    public static void main(String[] args) {
+        if (args.length < 1) {
+            System.out.println("Usage: java SolveMaze <mazeFile>");
+            return;
+        }
 
+        Maze maze = new Maze(args[0]);
+        SolveMaze solver = new SolveMaze(maze);
 
+        boolean solved = solver.solve(maze.getStart());
 
+        if (solved) {
+            System.out.println("Maze solved!");
+        } else {
+            System.out.println("No solution found.");
+        }
+
+        MazeViewer viewer = new MazeViewer(maze);
+        viewer.showMaze();
+    }
 }
+
+
