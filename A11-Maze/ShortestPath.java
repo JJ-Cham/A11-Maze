@@ -8,7 +8,7 @@ import java.util.*;
  * Uses a priority queue to expand nodes in order of increasing
  * distance until the finish is reached.
  *
- * @author Your Name
+ * @author JJ Cham
  * @version December 2025
  */
 public class ShortestPath {
