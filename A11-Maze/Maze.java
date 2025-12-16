@@ -142,23 +142,23 @@ public class Maze implements DisplayableMaze {
         mazeGrid[loc.getRow()][loc.getCol()] = MazeContents.PATH;
     }
 
-    /** Initializes a demo maze for testing. */
-    public void initDemoMaze() {
-        this.height = 5;
-        this.width = 5;
-        this.mazeGrid = new MazeContents[height][width];
-        this.start = new MazeLocation(0, 0);
-        this.finish = new MazeLocation(4, 4);
+    // /** Initializes a demo maze for testing. */
+    // public void initDemoMaze() {
+    //     this.height = 5;
+    //     this.width = 5;
+    //     this.mazeGrid = new MazeContents[height][width];
+    //     this.start = new MazeLocation(0, 0);
+    //     this.finish = new MazeLocation(4, 4);
 
-        for (int r = 0; r < height; r++) {
-            for (int c = 0; c < width; c++) {
-                mazeGrid[r][c] = MazeContents.OPEN;
-            }
-        }
+    //     for (int r = 0; r < height; r++) {
+    //         for (int c = 0; c < width; c++) {
+    //             mazeGrid[r][c] = MazeContents.OPEN;
+    //         }
+    //     }
 
-        mazeGrid[1][1] = MazeContents.WALL;
-        mazeGrid[2][2] = MazeContents.WALL;
-    }
+    //     mazeGrid[1][1] = MazeContents.WALL;
+    //     mazeGrid[2][2] = MazeContents.WALL;
+    // }
 
     /** This DemoMaze method will allow you to generate a simple maze
      * to test your code on as you develop it. Ultimately, you need

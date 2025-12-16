@@ -127,4 +127,8 @@ public class MazeLocation {
     public String toString() {
 	return "("+row+","+col+")";
     }
+
+    public MazeLocation move(MazeDirection dir) {
+        return neighbor(dir);
+    }
 }

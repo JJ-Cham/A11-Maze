@@ -100,4 +100,15 @@ public class MazeViewer extends JComponent implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		repaint();
 	}
+
+  /** Public bridge to ensure the maze window is shown (safe on EDT). */
+  public void showMaze() {
+    javax.swing.SwingUtilities.invokeLater(() -> {
+      if (frame == null) {
+        openWindow();
+      } else {
+        frame.setVisible(true);
+      }
+    });
+  }
 }
